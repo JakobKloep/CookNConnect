@@ -1,27 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipe Website</title>
-  <link rel="stylesheet" href="styles/main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="Style/index.css">
+    <script type="module" src="Scripts/Firebase-config.js"></script>
+    <script type="module" src="Scripts/auth.js"></script>    
 </head>
 <body>
-  <header>
-    <h1>Recipe Website</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Create Recipe</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Login</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main id="content">
-    <!-- Content will be dynamically loaded here -->
-  </main>
-  <script type="module" src="scripts/firebase-config.js"></script>
-  <script type="module" src="scripts/main.js"></script>
+    <header>
+        <nav>
+            <ul id="navList">
+                <li><a href="login.html" id="signInButton">Sign Up/Sign In</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to the Main Page</h1>
+    </main>
 </body>
 </html>

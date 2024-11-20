@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Sign Up</title>
+    <link rel="stylesheet" href="Style/index.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1 id="formTitle">Login</h1>
+        <div id="loginFormDiv">
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button class="button-33" role="button" id="growTreeButton" type="submit">Sign In</button>
+        </form>
+        <p id="registerLink">Don't have an account? <a href="#" id="showSignUpForm">Register here</a></p>
+        </div>
+        <form id="signUpForm" style="display: none;">
+            <label for="newEmail">Email:</label>
+            <input type="email" id="newEmail" name="newEmail" required>
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" name="newPassword" required>
+            <button type="submit">Sign Up</button>
+            <p id="loginLink" style="display: none;">Already have an account? <a href="#" id="showLoginForm">Back to Login</a></p>
+        </form>
+        <div id="treeContainer"></div>
+    </main>
+    <script type="module" src="Scripts/Firebase-config.js"></script>
+    <script type="module" src="Scripts/auth.js"></script>
+    <script>
+        document.getElementById('showSignUpForm').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('formTitle').innerText = 'Sign Up';
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signUpForm').style.display = 'block';
+            document.getElementById('registerLink').style.display = 'none';
+            document.getElementById('loginLink').style.display = 'block';
+        });
+
+        document.getElementById('showLoginForm').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('formTitle').innerText = 'Login';
+            document.getElementById('signUpForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerLink').style.display = 'block';
+            document.getElementById('loginLink').style.display = 'none';
+        });
+
+        document.getElementById('growTreeButton').addEventListener('click', () => {
+            const treeContainer = document.getElementById('treeContainer');
+            const seed = document.createElement('div');
+            seed.classList.add('seed');
+            treeContainer.appendChild(seed);
+
+            setTimeout(() => {
+                const tree = document.createElement('div');
+                tree.classList.add('tree');
+                treeContainer.appendChild(tree);
+            }, 2000); // Wait for the seed animation to complete
+        });
+    </script>
+</body>
+</html>
