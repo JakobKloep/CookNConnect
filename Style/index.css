@@ -35,7 +35,7 @@ form {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Add space between form elements */
+    gap: 10px;
 }
 
 #formTitle {

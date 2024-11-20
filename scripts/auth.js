@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Handle user authentication state changes
+
     onAuthStateChanged(auth, (user) => {
         const navList = document.getElementById('navList');
         if (navList) {

@@ -35,7 +35,7 @@ function compressImage(file, callback) {
     reader.readAsDataURL(file);
 }
 
-// Function to upload image
+
 window.uploadImage = async function() {
     const fileInput = document.getElementById('imageInput');
     const file = fileInput.files[0];
