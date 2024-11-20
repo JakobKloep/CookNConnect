@@ -1,7 +1,6 @@
-import { auth } from './Firebase-config.js';
+import { auth, db } from './Firebase-config.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-
-const provider = new GoogleAuthProvider();
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('signUpForm')?.addEventListener('submit', async (e) => {
@@ -12,7 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             await sendEmailVerification(userCredential.user);
             alert('Sign Up Successful. Please check your email to verify your account.');
-            window.location.href = 'index.html'; // Navigate to the main page after sign-up
+            await signOut(auth); // Sign out the user immediately after sign up
+            document.getElementById('formTitle').innerText = 'Login';
+            document.getElementById('signUpForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerLink').style.display = 'block';
+            document.getElementById('loginLink').style.display = 'none';
         } catch (error) {
             console.error('Error signing up: ', error);
             alert('Error signing up: ' + error.message);
@@ -30,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.location.href = 'index.html'; // Navigate to the main page after sign-in
             } else {
                 alert('Please verify your email before signing in.');
+                await signOut(auth); // Sign out the user if email is not verified
             }
         } catch (error) {
             console.error('Error signing in: ', error);
@@ -37,16 +42,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
         const navList = document.getElementById('navList');
         if (navList) {
             navList.innerHTML = ''; // Clear existing items
             if (user) {
                 // User is signed in
-                const profileButton = document.createElement('li');
-                profileButton.innerHTML = '<a href="profile.html">Profile</a>';
-                navList.appendChild(profileButton);
+                const userDoc = doc(db, 'users', user.uid);
+                const userSnapshot = await getDoc(userDoc);
+                let displayName = 'Profile';
+                let profilePicture = '';
+
+                if (userSnapshot.exists()) {
+                    const userData = userSnapshot.data();
+                    displayName = userData.displayName || 'Profile';
+                    profilePicture = userData.profilePicture || '';
+                }
+
+                const profileItem = document.createElement('li');
+                profileItem.innerHTML = `
+                    <div class="profile-info" id="profileInfo">
+                        <img src="${profilePicture ? 'data:image/jpeg;base64,' + profilePicture : 'default-profile.png'}" class="profile-picture" alt="Profile Picture">
+                        <span>${displayName}</span>
+                    </div>
+                `;
+                navList.appendChild(profileItem);
 
                 const signOutButton = document.createElement('li');
                 signOutButton.innerHTML = '<a href="#" id="signOutButton">Sign Out</a>';
@@ -54,13 +74,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 document.getElementById('signOutButton').addEventListener('click', async () => {
                     await signOut(auth);
-                    window.location.reload();
+                    alert('Sign Out Successful');
+                    window.location.href = 'index.html'; // Navigate to the main page after sign-out
+                });
+
+                document.getElementById('profileInfo').addEventListener('click', () => {
+                    window.location.href = 'profile.html'; // Navigate to the profile page
                 });
             } else {
-                // No user is signed in
-                const signInButton = document.createElement('li');
-                signInButton.innerHTML = '<a href="login.html" id="signInButton">Sign Up/Sign In</a>';
-                navList.appendChild(signInButton);
+                // User is signed out
+                const signUpButton = document.createElement('li');
+                signUpButton.innerHTML = '<a href="login.html">Login</a>';
+                navList.appendChild(signUpButton);
             }
         }
     });
