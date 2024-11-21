@@ -1,5 +1,5 @@
-import { db } from './Firebase-config.js';
-import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js';
+import { db } from './firebase-config.js';
+import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const userList = document.getElementById('userList');
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         displayUsers(users);
 
-        // Search functionality
+
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
             const filteredUsers = users.filter(user => user.displayName.toLowerCase().includes(searchTerm));

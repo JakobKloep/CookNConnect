@@ -1,6 +1,6 @@
-import { auth, db } from './Firebase-config.js';
-import { updateProfile, deleteUser, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { auth, db } from './firebase-config.js';
+import { updateProfile, deleteUser, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     onAuthStateChanged(auth, async (user) => {
@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 try {
                     if (user) {
                         const userDoc = doc(db, 'users', user.uid);
-                        await deleteDoc(userDoc); // Delete the Firestore document
-                        await deleteUser(user); // Delete the user account
+                        await deleteDoc(userDoc);
+                        await deleteUser(user);
                         alert('Account deleted successfully.');
-                        window.location.href = 'index.html'; // Navigate to the main page after account deletion
+                        window.location.href = 'index.html';
                     } else {
                         console.error('No user is currently signed in.');
                         alert('No user is currently signed in.');

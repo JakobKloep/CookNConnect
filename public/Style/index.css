@@ -2,6 +2,15 @@
     box-sizing: border-box;
 } */
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+input:-webkit-autofill{
+    -webkit-text-fill-color: yellow !important;
+}
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -10,7 +19,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: linear-gradient(135deg, #000000 0%, #434343 100%);
     overflow: hidden; /* Prevent scroll bars */
 }
 
@@ -26,6 +35,7 @@ nav ul {
     padding: 0;
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 
 nav ul li {
@@ -33,7 +43,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #333;
+    color: #c7c7c7;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
@@ -43,7 +53,8 @@ nav ul li a {
     display: flex;
     align-items: center;
     gap: 10px;
-    cursor: pointer; /* Make it clickable */
+    cursor: pointer; 
+    color: #c7c7c7;
 }
 
 .profile-picture {
@@ -51,3 +62,4 @@ nav ul li a {
     height: 40px;
     border-radius: 50%;
 }
+

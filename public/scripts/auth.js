@@ -1,6 +1,6 @@
-import { auth, db } from './Firebase-config.js';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+import { auth, db } from './firebase-config.js';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('signUpForm')?.addEventListener('submit', async (e) => {
@@ -79,11 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('signOutButton').addEventListener('click', async () => {
                     await signOut(auth);
                     alert('Sign Out Successful');
-                    window.location.href = 'index.html'; // Navigate to the main page after sign-out
+                    window.location.href = 'index.html';
                 });
 
                 document.getElementById('profileInfo').addEventListener('click', () => {
-                    window.location.href = 'profile.html'; // Navigate to the profile page
+                    window.location.href = 'profile.html';
                 });
             } else {
                 // User is signed out

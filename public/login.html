@@ -24,8 +24,9 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             <button class="button-80" role="button" id="growTreeButton" type="submit">Sign In</button>
+        
+        <p id="registerLink">Don't have an account? <a href="#" style="color:#2E91FF" id="showSignUpForm">Register here</a></p>
         </form>
-        <p id="registerLink">Don't have an account? <a href="#" id="showSignUpForm">Register here</a></p>
         </div>
         <div id="signUpFormDiv" class="hidden">
         <form id="signUpForm">
@@ -34,12 +35,12 @@
             <label for="newPassword">Password:</label>
             <input type="password" id="newPassword" name="newPassword" required>
             <button class="button-80" type="submit">Sign Up</button>
-            <p id="loginLink" >Already have an account? <a href="#" id="showLoginForm">Back to Login</a></p>
+            <p id="loginLink" >Already have an account? <a href="#" style="color:#2E91FF" id="showLoginForm">Back to Login</a></p>
         </form>
         </div>
     </main>
-    <script type="module" src="Scripts/Firebase-config.js"></script>
-    <script type="module" src="Scripts/auth.js"></script>
+    <script type="module" src="scripts/firebase-config.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('showSignUpForm').addEventListener('click', (e) => {
