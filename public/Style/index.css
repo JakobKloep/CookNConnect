@@ -1,6 +1,6 @@
-* { border: 1px solid red; 
+/** { border: 1px solid red; 
     box-sizing: border-box;
-} 
+} */
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -50,14 +50,4 @@ nav ul li a {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-}
-
-.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.visible {
-    opacity: 1;
-    pointer-events: auto;
 }

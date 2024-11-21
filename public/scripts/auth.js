@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Sign Up Successful. Please check your email to verify your account.');
             await signOut(auth); // Sign out the user immediately after sign up
             document.getElementById('formTitle').innerText = 'Login';
-            document.getElementById('signUpForm').style.display = 'none';
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('registerLink').style.display = 'block';
-            document.getElementById('loginLink').style.display = 'none';
+            document.getElementById('signUpForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerLink').classList.remove('hidden');
+            document.getElementById('loginLink').classList.add('hidden');
         } catch (error) {
             console.error('Error signing up: ', error);
             alert('Error signing up: ' + error.message);
@@ -46,6 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const navList = document.getElementById('navList');
         if (navList) {
             navList.innerHTML = ''; // Clear existing items
+            const usersButton = document.createElement('li');
+            usersButton.innerHTML = '<a href="users.html" id="usersButton">Users</a>';
+            navList.appendChild(usersButton);
+
             if (user) {
                 // User is signed in
                 const userDoc = doc(db, 'users', user.uid);
